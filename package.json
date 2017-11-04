@@ -8,11 +8,20 @@
   },
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "Harshit Pareek",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2"
+    "cookie-session": "^2.0.0-beta.3",
+    "express": "^4.16.2",
+    "mongoose": "^4.12.6",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
+    "q": "^1.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
   }
 }
