@@ -9,7 +9,8 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const googleStrategyOptions = {
     clientID: googleClientID,
     clientSecret: googleClientSecret,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "/auth/google/callback",
+    proxy: true
 }
 
 // serializing the user and sending the cookie to browser
