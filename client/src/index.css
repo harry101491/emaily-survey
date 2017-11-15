@@ -1,0 +1,8 @@
+.color-me {
+    animation: rainbow 10s linear infinite;
+}
+
+@keyframes rainbow {
+    from { background-color: blue; }
+    to { background-color: red; }
+}

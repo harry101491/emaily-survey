@@ -7,14 +7,15 @@ module.exports.authRoutes = (app) => {
     }));
 
     // handling the callback from the google after authentication
-    app.get("/auth/google/callback", passport.authenticate("google"));
+    app.get("/auth/google/callback", passport.authenticate("google"), (req, res) => {
+        res.redirect("/surveys");
+    });
 
     // logging out from the application
     app.get("/api/logout", (req, res) => {
         // logged out from the application with destroying the user object
         req.logout();
-        // nothing is sent as passport destroyed the req.user
-        res.send(req.user);
+        res.redirect("/");
     });
 
     // handling the route when the cookie has been set and user model is returned

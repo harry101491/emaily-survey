@@ -9,19 +9,28 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "server": "nodemon app.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "author": "Harshit Pareek",
+  "author": {
+    "name": "harshit pareek",
+    "age": 26,
+    "email": "hars.pareek@nyu.edu"
+  },
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.2",
     "mongoose": "^4.12.6",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
-    "q": "^1.5.1"
+    "stripe": "^5.3.0"
   },
   "devDependencies": {
+    "concurrently": "^3.5.0",
     "nodemon": "^1.12.1"
   }
 }

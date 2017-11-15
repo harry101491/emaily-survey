@@ -19,31 +19,32 @@ passport.serializeUser((user, done) => {
 });
 
 // deserializing the user and getting the unique identifier for the user
-passport.deserializeUser((token, done) => {
+passport.deserializeUser(async (token, done) => {
     // get the token and find the user with the token in the mongodb
-    findOneUserById(token).then((doc) => {
-        // everthing went great
+    try {
+        const doc = await findOneUserById(token);
         done(null, doc);
-    }, (err) => {
-        // error has occured
+    }
+    catch(err) {
         done(err, null);
-    });
+    }
 });
 
 // using google strategy
-passport.use(new GoogleStrategy(googleStrategyOptions, (accessToken, refreshToken, profile, done) => {
-    findOneUser({googleID: profile.id}).then((userDoc) => {
+passport.use(new GoogleStrategy(googleStrategyOptions, async (accessToken, refreshToken, profile, done) => {
+    try {
+        const userDoc = await findOneUser({googleID: profile.id});
         if(!userDoc) {
             // document is not present create a new one
-            insertOne({ googleID: profile.id }).then((doc) => {
-                done(null, doc);
-            }, (err) => {
-                done(err, null);
-            });
+            const doc = await insertOne({ googleID: profile.id });
+            done(null, doc);
         }
         else {
             // document is already present
             done(null, userDoc);
         }
-    });    
+    }
+    catch(err) {
+        done(err, null);
+    }
 }));
