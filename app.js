@@ -45,7 +45,7 @@ billingRoutes(app);
 // 2. whenever a route comes to the express server which it doesn't know (/surveys) it should serve index.html
 if(process.env.NODE_ENV === "production") {
     // serving the static resources
-    app.use(express.static("/client/build"));
+    app.use(express.static("client/build"));
 
     // serving the index.html file
     app.get("*", (req, res) => {
