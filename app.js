@@ -5,9 +5,10 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const path = require("path");
 
-// requring the authRoutes
+// requring the routes
 const { authRoutes } = require("./routes/authRoutes");
 const { billingRoutes } = require("./routes/billingRoutes");
+const { surveyRoutes } = require("./routes/surveyRoutes");
 
 const { cookieKey, mongoURI } = require("./config/keys");
 
@@ -15,8 +16,9 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-// requiring users model
+// requiring models
 require("./models/Users");
+require("./models/Surveys");
 
 // requring the passport service
 require("./services/passportService");
@@ -37,8 +39,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// hooking up the routes
 authRoutes(app);
 billingRoutes(app);
+surveyRoutes(app);
 
 // handling the two things when the NODE_ENV is production
 // 1. the public assests should be served from the /client/build directory
