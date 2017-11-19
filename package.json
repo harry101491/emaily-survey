@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Node + express server for the Survey Fullstack App ",
   "engines": {
-    "node": "8.1.1",
-    "npm": "5.0.3"
+    "node": ">=8.1.1",
+    "npm": ">=5.0.3"
   },
   "main": "app.js",
   "scripts": {
@@ -28,6 +28,7 @@
     "mongoose": "^4.12.6",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
+    "sendgrid": "^5.2.3",
     "stripe": "^5.3.0"
   },
   "devDependencies": {

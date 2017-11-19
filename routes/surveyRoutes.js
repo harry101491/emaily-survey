@@ -3,6 +3,12 @@ const Survey = mongoose.model("Surveys");
 const authUserMiddleware = require("../middlewares/authUserMiddleware");
 const requiredCredit = require("../middlewares/requireCredit");
 
+// requring the template
+const surveyTemplate = require("../services/emailTemplates/surveyTemplates");
+
+// requiring Mailer Class
+const Mailer = require("../services/Mailer");
+
 // all the routes that are related to the survey
 module.exports.surveyRoutes = (app) => {
     // post request to the server that will create survey document
@@ -15,7 +21,12 @@ module.exports.surveyRoutes = (app) => {
             title: title,
             body: body,
             subject: subject,
-            
+            dateSent: Date.now(),
+            _user: req.user.id,
+            recipients: recipients.split(",").map((emailString) => { email: emailString})
         });
+
+        // creating mailer object
+        const mailer = new Mailer(survey, surveyTemplate(survey));
     });
 }
