@@ -12,6 +12,10 @@ import { createStore, applyMiddleware } from "redux";
 import reducers from "./reducers";
 import reduxThunk from "redux-thunk";
 
+// testing the backend with the axios
+import axiox from "axios";
+window.axios = axiox;
+
 // creating the redux store
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 

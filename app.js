@@ -5,6 +5,10 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const path = require("path");
 
+// requiring models
+require("./models/Users");
+require("./models/Surveys");
+
 // requring the routes
 const { authRoutes } = require("./routes/authRoutes");
 const { billingRoutes } = require("./routes/billingRoutes");
@@ -15,10 +19,6 @@ const { cookieKey, mongoURI } = require("./config/keys");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
-
-// requiring models
-require("./models/Users");
-require("./models/Surveys");
 
 // requring the passport service
 require("./services/passportService");
