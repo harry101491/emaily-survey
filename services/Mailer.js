@@ -19,14 +19,14 @@ class Mailer extends helper.Mail {
         // creating the sendgrid api instance
         this.SGAPI = sendgrid(sendGridKey);
         // the email address that is sending the emails to user like (no-reply@emaily.com)
-        this.from_email = new helper.Email("no-reply@email.com");
+        this.from_email = new helper.Email("no-reply@emaily.com");
         // subject of the email
         this.subject = subject;
         // specifiying the content of the email
         this.body = new helper.Content("text/html", content);
         // formatting the recipients addresses by helper function
         this.recipients = this.formatAddresses(recipients);
-
+        
         // registering the content with Mail class built-in function addContent
         this.addContent(this.body);
         // adding the clicktracking in the email
@@ -73,7 +73,7 @@ class Mailer extends helper.Mail {
         });
 
         // waiting for the responce
-        const responce = await this.SGAPI.API(request);
+        const responce = this.SGAPI.API(request);
         return responce;
     }
 }
