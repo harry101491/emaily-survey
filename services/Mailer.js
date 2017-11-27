@@ -7,6 +7,7 @@ const helper = sendgrid.mail;
 
 // getting the keys from the config folder
 const { sendGridKey } = require("../config/keys");
+console.log(`the value sendgrid key is: ${sendGridKey}`);
 
 // extending the class helper.Mail
 class Mailer extends helper.Mail {
@@ -25,9 +26,10 @@ class Mailer extends helper.Mail {
         this.subject = subject;
         // specifiying the content of the email
         this.body = new helper.Content("text/html", content);
+        console.log(`the body is: ${JSON.stringify(this.body)}`);
         // formatting the recipients addresses by helper function
         this.recipients = this.formatAddresses(recipients);
-        
+        console.log(`the value of recipients is: ${JSON.stringify(this.recipients)}`);
         // registering the content with Mail class built-in function addContent
         this.addContent(this.body);
         // adding the clicktracking in the email
@@ -42,7 +44,7 @@ class Mailer extends helper.Mail {
         // console.log(`Inside the formatAddress method ${JSON.stringify(recipients)}`);
         // console.log(`the value of helper Email Object is: ${helper.Email(recipients[0].email)}`);
         return _.map(recipients, ({ email }) => {
-            return helper.Email(email);
+            return new helper.Email(email);
         });
     }
     // helper method for click tracking funtionality
@@ -60,6 +62,7 @@ class Mailer extends helper.Mail {
 
         // adding every recipient to sending list of the mail
         _.forEach(this.recipients, (recipient) => {
+            console.log(`the recipients added to personalize is: ${JSON.stringify(recipient)}`);
             personalize.addTo(recipient);
         });
         
