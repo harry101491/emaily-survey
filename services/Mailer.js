@@ -2,7 +2,7 @@
 const sendgrid = require("sendgrid");
 const _ = require("lodash");
 
-// getting the helper from the sendgrid.mail
+// getting the helper from the sendgrid
 const helper = sendgrid.mail;
 
 // getting the keys from the config folder
@@ -38,6 +38,8 @@ class Mailer extends helper.Mail {
     // helper method to format the addresses of the recipients
     formatAddresses(recipients) {
         // return an array of all email objects for every recipients
+        // console.log(`Inside the formatAddress method ${JSON.stringify(recipients)}`);
+        // console.log(`the value of helper Email Object is: ${helper.Email(recipients[0].email)}`);
         return _.map(recipients, ({ email }) => {
             return helper.Email(email);
         });
@@ -65,6 +67,7 @@ class Mailer extends helper.Mail {
     }
 
     async send() {
+        console.log(`Inside the send method`);
         // creating an empty request
         const request = this.SGAPI.emptyRequest({
             method: "POST",
@@ -73,7 +76,7 @@ class Mailer extends helper.Mail {
         });
 
         // waiting for the responce
-        const responce = this.SGAPI.API(request);
+        const responce = await this.SGAPI.API(request);
         return responce;
     }
 }
