@@ -16,6 +16,7 @@ class Mailer extends helper.Mail {
     constructor({ subject, recipients }, content) {
         super();
 
+        console.log("Inside the constructor");
         // creating the sendgrid api instance
         this.SGAPI = sendgrid(sendGridKey);
         // the email address that is sending the emails to user like (no-reply@emaily.com)
