@@ -80,7 +80,7 @@ class Mailer extends helper.Mail {
         });
 
         // waiting for the responce
-        const responce = this.SGAPI.API(request);
+        const responce = await this.SGAPI.API(request);
         return responce;
     }
 }

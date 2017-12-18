@@ -12,7 +12,7 @@ const Mailer = require("../services/Mailer");
 // all the routes that are related to the survey
 module.exports.surveyRoutes = (app) => {
     // post request to the server that will create survey document
-    app.post("/api/surveys", authUserMiddleware, requiredCredit, (req, res) => {
+    app.post("/api/surveys", authUserMiddleware, requiredCredit, async (req, res) => {
         // destructuring the request body
         const { title, subject, body, recipients  } = req.body;
 
@@ -31,6 +31,6 @@ module.exports.surveyRoutes = (app) => {
 
         // creating mailer object
         const mailer = new Mailer(survey, surveyTemplate(survey));
-        mailer.send();
+        await mailer.send();
     });
 }
