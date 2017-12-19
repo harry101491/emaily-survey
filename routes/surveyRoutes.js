@@ -28,9 +28,23 @@ module.exports.surveyRoutes = (app) => {
             })
         });
         // console.log(`the value of survey object formed is: ${JSON.stringify(survey)}`);
-
-        // creating mailer object
-        const mailer = new Mailer(survey, surveyTemplate(survey));
-        await mailer.send();
+        try {
+            // creating mailer object
+            const mailer = new Mailer(survey, surveyTemplate(survey));
+            // send the mailer object to the sendgrid
+            await mailer.send();
+            // save the survey object to the mongo db
+            await survey.save();
+            // update the user credits as user has used the at least 1 credit from the total credits
+            req.user.credits -= 1;
+            // save the updated user and get the updated user from database
+            const user = await req.user.save();
+            // send the user to the front end and update new credits
+            res.send(user);
+        }
+        catch(err) {
+            // if error has occured then we will reply the error (some wrong data has been sent by user)
+            res.status(422).send(err);
+        }
     });
 }
