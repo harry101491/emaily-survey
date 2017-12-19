@@ -1,3 +1,4 @@
+const keys = require("../../config/keys");
 module.exports = ({ body }) => {
     return `
     <html>
@@ -7,10 +8,10 @@ module.exports = ({ body }) => {
                 <p>Please! Click on one of the following links and reply the survey</p>
                 <p>${body}</p>
                 <div>
-                    <a href="http://localhost:3000">Yes</a>
+                    <a href="${keys.redirectDomain}">Yes</a>
                 </div>
                 <div>
-                <a href="http://localhost:3000">No</a>
+                <a href="${keys.redirectDomain}">No</a>
             </div>
             </div>
         </body>
