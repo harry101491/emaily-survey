@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Dashboard extends Component {
     render() {
@@ -6,9 +7,9 @@ class Dashboard extends Component {
             <div>
                 <h2> Dashboard </h2>
                 <div className="fixed-action-btn">
-                    <a className="btn-floating btn-large blue">
+                   <Link to="/surveys/new" className="btn-floating btn-large blue">
                         <i className="large material-icons">add</i>
-                    </a>
+                    </Link>
                 </div>
             </div>
         );
