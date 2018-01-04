@@ -11,6 +11,11 @@ const Mailer = require("../services/Mailer");
 
 // all the routes that are related to the survey
 module.exports.surveyRoutes = (app) => {
+    //handling the feedback from the user either by clicking yes or no
+    app.get("/api/surveys/thanks", (req, res) => {
+        res.send("<h2>Thanks for your valuable feedback</h2>");
+    });
+
     // post request to the server that will create survey document
     app.post("/api/surveys", authUserMiddleware, requiredCredit, async (req, res) => {
         // destructuring the request body
